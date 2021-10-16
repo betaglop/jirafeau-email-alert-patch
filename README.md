@@ -2,7 +2,7 @@
 
 ## PHPMailer
 
-Install PHPMailer in your instance in a directory named `PHPMailer`
+Deploy PHPMailer classes in a directory named `phpmailer` located in the root directory of your instance.
 
 ## Patch
 
