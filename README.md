@@ -18,3 +18,5 @@ Do not forget seting the parameter `contactperson` in your `lib/config.local.php
 ## Test
 
 Test your configuration and... it's done.
+
+Do not forget checking your spambox... in case the email is considered as a spam.
