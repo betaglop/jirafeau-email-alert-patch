@@ -1,0 +1,32 @@
+--- f.php.orig
++++ f.php
+@@ -228,6 +228,29 @@
+ 
+ header('HTTP/1.0 200 OK');
+ header('Content-Length: ' . $link['file_size']);
++use PHPMailer\PHPMailer\Exception;
++use PHPMailer\PHPMailer\PHPMailer;
++use PHPMailer\PHPMailer\SMTP;
++require './phpmailer/Exception.php';
++require './phpmailer/PHPMailer.php';
++require './phpmailer/SMTP.php';
++$mail = new PHPMailer(true);
++try {
++	$mail->SMTPDebug = SMTP::DEBUG_SERVER;
++	$mail->isSMTP();
++	$mail->Host = 'smtp.e-glop.net';
++	$mail->Port = 25;
++
++	$mail->setFrom('no_reply@'.$_SERVER['SERVER_NAME'], $_SERVER['SERVER_NAME']);
++	$mail->addAddress($cfg['contactperson'], 'filemaster');     //Add a recipient
++	$txt = 'File '.$link['file_name'].' downloaded';
++	$mail->Subject = $_SERVER['SERVER_NAME'].': '.$txt;
++	$mail->Body    = $txt."\n@ ".date('Y-m-d H:i:s')." with \nMD5: ".$link['hash']." and \nURL: ".$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
++
++	$mail->send();
++} catch (Exception $e) {
++    error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
++}
+ if (!jirafeau_is_viewable($link['mime_type']) || !$cfg['preview'] || $do_download) {
+     header('Content-Disposition: attachment; filename="' . $link['file_name'] . '"');
+ } else {
