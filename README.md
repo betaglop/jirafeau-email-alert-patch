@@ -1,4 +1,4 @@
-# How to install this patch
+# How to use this patch
 
 ## PHPMailer
 
