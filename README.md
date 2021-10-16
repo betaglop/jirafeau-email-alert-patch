@@ -13,7 +13,10 @@ wget https://raw.githubusercontent.com/betaglop/jirafeau-email-alert-patch/main/
 
 ## Setup
 
-Do not forget seting the parameter `contactperson` in your `lib/config.local.php`.
+Do not forget setting the following parameters in your `lib/config.local.php` file:
+
+* `$cfg['contactperson'] = 'contact@yourdomain.tld'` and
+* `$cfg['smtp'] = array('host' => 'smtp.yourdomain.tld', 'port' => 25),`
 
 ## Test
 
